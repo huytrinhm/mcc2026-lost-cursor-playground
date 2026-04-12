@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lost Cursor Playground</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <main class="main-panel">
+        <div class="workspace">
+          <section class="board-panel">
+            <div class="intro">
+              <p class="eyebrow">Lost Cursor Playground</p>
+              <h1>Draw a move pattern and see which white start pixels still miss black.</h1>
+              <p class="intro-copy">
+                Click the full image to place the current path, then switch to the 50x50 fine grid on the
+                right when you need tighter control over the path itself.
+              </p>
+            </div>
+
+            <div class="board-header">
+              <div class="board-heading">
+                <p class="eyebrow">Active image</p>
+                <h2 id="activeImageTitle">01.png</h2>
+                <p id="activeImageStats" class="active-image-stats">0 moves - 0 / 0 pixels</p>
+              </div>
+              <div class="hover-pill" id="hoverLabel">Hover the board</div>
+            </div>
+
+            <div id="boardWrap" class="board-wrap">
+              <canvas id="boardCanvas" aria-label="Grid viewer"></canvas>
+            </div>
+
+            <div class="legend">
+              <span><span class="legend-swatch missed"></span> Missed white starts</span>
+              <span><span class="legend-swatch trail"></span> Drawn move trail</span>
+              <span><span class="legend-swatch endpoint"></span> Trail endpoint</span>
+            </div>
+          </section>
+
+          <aside class="right-rail">
+            <div class="rail-section">
+              <div class="section-title-row">
+                <h2>Fine Grid</h2>
+                <span id="detailLabel" class="status-pill">50 x 50</span>
+              </div>
+              <p class="controls-copy">
+                Left-drag to extend the path. Right-drag to pan the 50x50 viewport across the source image.
+                Keyboard arrows append moves. Hold Ctrl with the arrows to nudge the starting point.
+              </p>
+              <div id="detailWrap" class="detail-wrap">
+                <canvas id="detailCanvas" aria-label="Fine grid editor"></canvas>
+              </div>
+              <div class="detail-toolbar">
+                <div class="pan-pad" aria-label="Viewport pan pad">
+                  <button type="button" class="pan-button up" data-pan="U">Up</button>
+                  <button type="button" class="pan-button left" data-pan="L">Left</button>
+                  <button type="button" class="pan-button down" data-pan="D">Down</button>
+                  <button type="button" class="pan-button right" data-pan="R">Right</button>
+                </div>
+                <div class="button-row">
+                  <button type="button" id="undoButton">Undo</button>
+                  <button type="button" id="clearButton">Clear</button>
+                  <button type="button" id="focusEndpointButton">View endpoint</button>
+                  <button type="button" id="centerButton">Center overlay</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="rail-section">
+              <div class="section-title-row">
+                <h2>Images</h2>
+                <span id="loadingLabel" class="status-pill">Loading...</span>
+              </div>
+              <div id="imageList" class="image-list" aria-label="Input image selector"></div>
+            </div>
+
+            <div class="rail-section">
+              <div class="section-title-row">
+                <h2>Sequence</h2>
+                <span id="lengthLabel" class="status-pill">0 / 5000</span>
+              </div>
+              <label class="sr-only" for="sequenceInput">Move sequence</label>
+              <textarea
+                id="sequenceInput"
+                spellcheck="false"
+                autocomplete="off"
+                autocapitalize="off"
+                placeholder="Draw on the board or type a move string here."
+              ></textarea>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
